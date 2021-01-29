@@ -54,6 +54,9 @@ class UserController extends Controller
      */
     public function store(UserAddRequest $request)
     {
+        $fields = $request->all();
+        $fields['isp_id'] = 7;
+        $fields['owner_id'] = 0;
         $user = User::create($request->all());
         $role = Role::find($request->role);
         if($role)

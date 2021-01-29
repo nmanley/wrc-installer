@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'isp_id', 'owner_id'
     ];
 
     protected $appends = ['allPermissions', 'profilelink', 'avatarlink', 'isme'];
@@ -51,5 +51,16 @@ class User extends Authenticatable
             $res[] = $p->name;
         }
         return $res;
+    }
+
+    /**
+     * Owner ID
+     * Used for teams.
+     *
+     * @return void
+     */
+    public function owner()
+    {
+        return $this->belongsTo('App\User', 'owner_id', 'id');
     }
 }
